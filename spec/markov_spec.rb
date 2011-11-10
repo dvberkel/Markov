@@ -7,4 +7,13 @@ describe "Markov" do
 			book.should be_an_instance_of Markov
 		end
 	end
+	
+	describe "states" do
+		describe "initially" do
+			it "returns nothing" do
+				book = Markov.new
+				book.should have(0).states
+			end
+		end
+	end
 end
