@@ -20,7 +20,7 @@ describe "Markov" do
 		describe "after adding a transition" do
 			it "should have 2 elements" do
 				markov = Markov.new
-				transition = Transition.new
+				transition = Transition.new(0,1)
 				
 				markov.add(transition)
 				
