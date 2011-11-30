@@ -1,9 +1,12 @@
 require 'transition'
 
 describe "Transition" do
+	expectedFrom = 0
+	expectedTo = 1
+	transition = Transition.new(expectedFrom, expectedTo)
+	
 	describe "#new" do
 		it "should create an instance of the Transition class" do
-			transition = Transition.new(0,1)
 			transition.should be_an_instance_of Transition
 		end
 		
@@ -14,23 +17,17 @@ describe "Transition" do
 	
 	describe "#from" do
 		it "should return the first constructor argument" do
-			expected = 0
-			transition = Transition.new(expected,1)
-			
 			from = transition.from
 			
-			from.should == expected
+			from.should == expectedFrom
 		end
 	end
 	
 	describe "#to" do
 		it "should return the second constructor argument" do
-			expected = 1
-			transition = Transition.new(0,expected)
-			
 			to = transition.to
 			
-			to.should == expected
+			to.should == expectedTo
 		end
 	end
 end
