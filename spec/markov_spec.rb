@@ -1,4 +1,5 @@
 require 'markov'
+require 'transition'
 
 describe "Markov" do
 	describe "#new" do
@@ -10,9 +11,20 @@ describe "Markov" do
 	
 	describe "states" do
 		describe "initially" do
-			it "returns nothing" do
+			it "should have no elements" do
 				markov = Markov.new
 				markov.should have(0).states
+			end
+		end
+		
+		describe "after adding a transition" do
+			it "should have 2 elements" do
+				markov = Markov.new
+				transition = Transition.new
+				
+				markov.add(transition)
+				
+				markov.should have(2).states
 			end
 		end
 	end
