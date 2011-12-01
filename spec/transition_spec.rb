@@ -1,13 +1,15 @@
 require 'transition'
 
 describe "Transition" do
-	expectedFrom = 0
-	expectedTo = 1
-	transition = Transition.new(expectedFrom, expectedTo)
+	before(:each) do
+		@expectedFrom = 0
+		@expectedTo = 1
+		@transition = Transition.new(@expectedFrom, @expectedTo)
+	end
 	
 	describe "#new" do
 		it "should create an instance of the Transition class" do
-			transition.should be_an_instance_of Transition
+			@transition.should be_an_instance_of Transition
 		end
 		
 		it "should have two arguments" do
@@ -17,17 +19,17 @@ describe "Transition" do
 	
 	describe "#from" do
 		it "should return the first constructor argument" do
-			from = transition.from
+			from = @transition.from
 			
-			from.should == expectedFrom
+			from.should == @expectedFrom
 		end
 	end
 	
 	describe "#to" do
 		it "should return the second constructor argument" do
-			to = transition.to
+			to = @transition.to
 			
-			to.should == expectedTo
+			to.should == @expectedTo
 		end
 	end
 end
