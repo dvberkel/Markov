@@ -1,6 +1,9 @@
+require 'prng'
+
 class Markov
-	def initialize
+	def initialize(prng = RPrng.new)
 		@stateTransitions = {}
+		@prng = prng
 	end
 	
 	def states
@@ -26,7 +29,8 @@ class Markov
 	private
 	def transition(element)
 		if (@stateTransitions.include?(element) and not @stateTransitions[element].empty?) then
-			return @stateTransitions[element][0].to
+			index = @prng.rand(@stateTransitions[element].length)
+			return @stateTransitions[element][index].to
 		else
 			return nil
 		end

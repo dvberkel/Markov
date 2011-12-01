@@ -1,5 +1,6 @@
 require 'markov'
 require 'transition'
+require 'prng'
 
 describe "Markov" do
 	describe "#new" do
@@ -77,7 +78,7 @@ describe "Markov" do
 	
 	describe "#apply" do
 		before(:each) do
-			@markov = Markov.new
+			@markov = Markov.new(Prng.new)
 		end
 		
 		describe "after adding a transition with from an to" do
@@ -122,5 +123,26 @@ describe "Markov" do
 				end
 			end
 		end
+		
+		describe "probabilistic aspect" do
+			describe "transitions with same from element" do
+				it "should be returned with equal probability" do
+					@markov.add(Transition.new(0,1))
+					@markov.add(Transition.new(0,2))
+					count = {}
+					
+					2.times do
+						result = @markov.apply(0)
+						if (not count.keys.include?(result)) then
+							count[result] = 0
+						end
+						count[result] += 1
+					end
+										
+					count[1].should be(1)
+					count[2].should be(1)
+				end
+			end
+		end
 	end
-end
+end 
