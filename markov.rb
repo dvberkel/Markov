@@ -1,18 +1,18 @@
 class Markov
 	def initialize
-		@states = []
+		@stateTransitions = {}
 	end
 	
 	def states
-		return @states
+		return @stateTransitions.keys
 	end
 	
 	def add(transition)
-		if (not @states.include?(transition.from)) then
-			@states.push(transition.from)
+		if (not @stateTransitions.keys.include?(transition.from)) then
+			@stateTransitions[transition.from] = []
 		end
-		if (not @states.include?(transition.to)) then
-			@states.push(transition.to)
+		if (not @stateTransitions.keys.include?(transition.to)) then
+			@stateTransitions[transition.to] = []
 		end
 	end
 end
