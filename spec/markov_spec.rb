@@ -39,5 +39,29 @@ describe "Markov" do
 				@markov.should have(2).states
 			end
 		end
+		
+		describe "after adding 2 disjunct transitions" do
+			it "should have 4 elements" do
+				thisTransition = Transition.new(0,1)
+				thatTransition = Transition.new(2,3)
+				
+				@markov.add(thisTransition)
+				@markov.add(thatTransition)
+				
+				@markov.should have(4).states
+			end
+		end
+		
+		describe "after adding 2 transitions with an element in common" do
+			it "should have 3 elements" do
+				thisTransition = Transition.new(0,1)
+				thatTransition = Transition.new(1,2)
+				
+				@markov.add(thisTransition)
+				@markov.add(thatTransition)
+				
+				@markov.should have(3).states
+			end
+		end
 	end
 end
