@@ -64,7 +64,7 @@ describe "Markov" do
 			end
 		end
 		
-		describe "after adding a transition with to and from" do
+		describe "after adding a transition with from and to" do
 			it "should have corresponding elements" do
 				transition = Transition.new(0,1)
 				
@@ -80,7 +80,7 @@ describe "Markov" do
 			@markov = Markov.new
 		end
 		
-		describe "after adding a transition with to an from" do
+		describe "after adding a transition with from an to" do
 			it "should return to when given from" do
 				@markov.add(Transition.new(0,1))
 				
