@@ -74,4 +74,20 @@ describe "Markov" do
 			end
 		end
 	end
+	
+	describe "#apply" do
+		before(:each) do
+			@markov = Markov.new
+		end
+		
+		describe "after adding a transition with to an from" do
+			it "should return to when given from" do
+				@markov.add(Transition.new(0,1))
+				
+				result = @markov.apply(0)
+				
+				result.should be(1)
+			end
+		end
+	end
 end

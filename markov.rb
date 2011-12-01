@@ -13,5 +13,10 @@ class Markov
 				@stateTransitions[element] = []
 			end
 		}
+		@stateTransitions[transition.from].push(transition)
+	end
+	
+	def apply(element)
+		return @stateTransitions[element][0].to
 	end
 end
