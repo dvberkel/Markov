@@ -16,11 +16,18 @@ class Markov
 		@stateTransitions[transition.from].push(transition)
 	end
 	
-	def apply(element)
-		if (@stateTransitions.include?(element)) then
-			if (not @stateTransitions[element].empty?) then
-				return @stateTransitions[element][0].to
+	def apply(element, numberOf = 1)
+		numberOf.times do
+			if (@stateTransitions.include?(element)) then
+				if (not @stateTransitions[element].empty?) then
+					element = @stateTransitions[element][0].to
+				else 
+					element = nil
+				end
+			else
+				element = nil
 			end
 		end
+		return element
 	end
 end

@@ -83,28 +83,43 @@ describe "Markov" do
 		describe "after adding a transition with from an to" do
 			it "should return to when given from" do
 				@markov.add(Transition.new(0,1))
-				
+			
 				result = @markov.apply(0)
-				
+			
 				result.should be(1)
 			end
 		end
-		
-		describe "starting element is not a state" do
-			it "should return nil" do
-				result = @markov.apply(0)
+
+		describe "starting element" do
+			describe "is not a state" do
+				it "should return nil" do
+					result = @markov.apply(0)
 				
-				result.should be(nil)
+					result.should be(nil)
+				end
+			end
+		
+			describe "is not a from state" do
+				it "should return nil" do
+					@markov.add(Transition.new(0,1))
+				
+					result = @markov.apply(1)
+				
+					result.should be(nil)
+				end
 			end
 		end
 		
-		describe "starting element is not a from state" do
-			it "should return nil" do
-				@markov.add(Transition.new(0,1))
-				
-				result = @markov.apply(1)
-				
-				result.should be(nil)
+		describe "multiple times" do
+			describe "consecutive transitions" do
+				it "should return last to element" do
+					@markov.add(Transition.new(0,1))
+					@markov.add(Transition.new(1,2))
+					
+					result = @markov.apply(0,2)
+					
+					result.should be(2)
+				end
 			end
 		end
 	end
