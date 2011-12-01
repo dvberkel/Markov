@@ -8,6 +8,11 @@ class Markov
 	end
 	
 	def add(transition)
-		@states.push(0,1)
+		if (not @states.include?(transition.from)) then
+			@states.push(transition.from)
+		end
+		if (not @states.include?(transition.to)) then
+			@states.push(transition.to)
+		end
 	end
 end

@@ -28,5 +28,16 @@ describe "Markov" do
 				@markov.should have(2).states
 			end
 		end
+		
+		describe "after adding a transition twice" do
+			it "should still have 2 elements" do
+				transition = Transition.new(0,1)
+				
+				@markov.add(transition)
+				@markov.add(transition)
+				
+				@markov.should have(2).states
+			end
+		end
 	end
 end
