@@ -32,4 +32,19 @@ describe "Transition" do
 			to.should == @expectedTo
 		end
 	end
+	
+	describe "#each" do
+		it "should accept an block" do
+			@transition.each {}
+		end
+		
+		it "should be passed to and from" do
+			result = []
+			
+			@transition.each {|x| result.push(x)}
+			
+			result.should include(@expectedFrom)
+			result.should include(@expectedTo)
+		end
+	end
 end

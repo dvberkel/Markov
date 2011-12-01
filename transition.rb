@@ -11,4 +11,8 @@ class Transition
 	def to
 		return @to
 	end
+	
+	def each
+		[@from, @to].each {|element| yield(element)}
+	end
 end
