@@ -127,11 +127,14 @@ describe "Markov" do
 		describe "probabilistic aspect" do
 			describe "transitions with same from element" do
 				it "should be returned with equal probability" do
-					@markov.add(Transition.new(0,1))
-					@markov.add(Transition.new(0,2))
+					expectedNumber = 5
+					numberOfTransitions = 2
 					count = {}
+					(1..numberOfTransitions).each {|i|
+						@markov.add(Transition.new(0,i))
+					}
 					
-					2.times do
+					(numberOfTransitions * expectedNumber).times do
 						result = @markov.apply(0)
 						if (not count.keys.include?(result)) then
 							count[result] = 0
@@ -139,8 +142,9 @@ describe "Markov" do
 						count[result] += 1
 					end
 										
-					count[1].should be(1)
-					count[2].should be(1)
+					count.keys.each {|key|
+						count[key].should be(expectedNumber)
+					}
 				end
 			end
 		end
