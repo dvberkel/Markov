@@ -8,7 +8,7 @@ class Markov
 	end
 	
 	def add(transition)
-		[transition.from, transition.to].each { |element|
+		transition.each { |element|
 			if (not @stateTransitions.keys.include?(element)) then
 				@stateTransitions[element] = []
 			end
