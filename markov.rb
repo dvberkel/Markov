@@ -17,6 +17,10 @@ class Markov
 	end
 	
 	def apply(element)
-		return @stateTransitions[element][0].to
+		if (@stateTransitions.include?(element)) then
+			if (not @stateTransitions[element].empty?) then
+				return @stateTransitions[element][0].to
+			end
+		end
 	end
 end

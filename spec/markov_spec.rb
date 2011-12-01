@@ -89,5 +89,23 @@ describe "Markov" do
 				result.should be(1)
 			end
 		end
+		
+		describe "starting element is not a state" do
+			it "should return nil" do
+				result = @markov.apply(0)
+				
+				result.should be(nil)
+			end
+		end
+		
+		describe "starting element is not a from state" do
+			it "should return nil" do
+				@markov.add(Transition.new(0,1))
+				
+				result = @markov.apply(1)
+				
+				result.should be(nil)
+			end
+		end
 	end
 end
