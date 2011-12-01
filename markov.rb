@@ -18,12 +18,17 @@ class Markov
 	
 	def apply(element, numberOf = 1)
 		numberOf.times do
-			if (@stateTransitions.include?(element) and not @stateTransitions[element].empty?) then
-				element = @stateTransitions[element][0].to
-			else
-				element = nil
-			end
+			element = transition(element)
 		end
 		return element
+	end
+	
+	private
+	def transition(element)
+		if (@stateTransitions.include?(element) and not @stateTransitions[element].empty?) then
+			return @stateTransitions[element][0].to
+		else
+			return nil
+		end
 	end
 end
