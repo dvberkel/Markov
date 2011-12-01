@@ -63,5 +63,15 @@ describe "Markov" do
 				@markov.should have(3).states
 			end
 		end
+		
+		describe "after adding a transition with to and from" do
+			it "should have corresponding elements" do
+				transition = Transition.new(0,1)
+				
+				@markov.add(transition)
+				
+				@markov.states.should include(0,1)
+			end
+		end
 	end
 end
