@@ -2,12 +2,15 @@ require 'rubygems'
 require 'rake'
 require 'rspec/core/rake_task'
 
+inputFile = 'resource/alice_in_wonderland.txt'
+strippedFile = 'resource/alice.txt'
+
 desc "Create Alice in Wonderland file without Gutenberg banner"
-file "resource/alice.txt" do |t|
-	puts "Creating alice.txt"
-	File.open("resource/alice.txt", "w") do |out|
+file strippedFile do |t|
+	puts "Creating " + strippedFile
+	File.open(strippedFile, "w") do |out|
 		output = false
-		File.open("resource/alice_in_wonderland.txt") do |file|
+		File.open(inputFile) do |file|
 			while line = file.gets
 				output = false if (line =~ /^\*{3} END/)
 				if (output) then
@@ -20,7 +23,7 @@ file "resource/alice.txt" do |t|
 end
 
 desc "Create an example text from Alice in Wonderland"
-task :create => ["resource/alice.txt"] do 
+task :create => [strippedFile] do 
 	puts "Hello World"
 end
 
@@ -32,7 +35,7 @@ end
 
 desc "Clean project from created artifacts"
 task :clean do
-	['resource/alice.txt'].each do |fileName|
+	[strippedFile].each do |fileName|
 		if (File.exists?(fileName)) then
 			puts "Removing " + fileName
 			File.delete(fileName)
