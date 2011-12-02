@@ -3,9 +3,9 @@ require 'transitionProvider'
 describe "TransitionProvider" do
 	describe "LineSplitter" do
 		it "should take a line and a positive number" do
-			provider = LineSplitter.new("", 1)
+			splitter = LineSplitter.new("", 1)
 			
-			provider.should_not be(nil)
+			splitter.should_not be(nil)
 		end
 		
 		describe "#next" do
@@ -15,21 +15,23 @@ describe "TransitionProvider" do
 				end
 			end
 			
-			it "should return 'a, b, c, d, nil' on input 'abcd', 1" do
+			it "given line and length should return sequence and residue" do
 				[
-					['abcd', 1, ['a', 'b', 'c', 'd', nil]],
-					['abcd', 2, ['ab', 'cd', nil]],
-					['abcd', 3, ['abc', nil]]
+					['abcd', 1, ['a', 'b', 'c', 'd', nil], ''],
+					['abcd', 2, ['ab', 'cd', nil], ''],
+					['abcd', 3, ['abc', nil], 'd']
 				].each do |data|
 					line = data[0]
 					length = data[1]
 					expectedSequence = data[2]
+					expectedResidue = data[3]
 					
-					provider = LineSplitter.new(line, length)
+					splitter = LineSplitter.new(line, length)
 					
 					expectedSequence.each do |expected|
-						provider.next().should == expected
+						splitter.next().should == expected
 					end
+					splitter.residue.should == expectedResidue
 				end
 			end
 		end

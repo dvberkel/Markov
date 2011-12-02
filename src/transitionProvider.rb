@@ -14,4 +14,8 @@ class LineSplitter
 			return nil
 		end
 	end
+	
+	def residue
+		return @line[@index .. @line.size]
+	end
 end
