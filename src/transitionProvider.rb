@@ -23,10 +23,16 @@ class LineSplitter
 end
 
 class LineTransitionProvider
-	def initialize(line, length)
-		@splitter = LineSplitter.new(line, length)
-		@from = @splitter.next()
-		@to = @splitter. next()
+	def initialize(line, length, provider = nil)
+		if (provider)
+			@splitter = LineSplitter.new(provider.residue + line, length)
+			@from = provider.from
+			@to = @splitter.next();
+		else
+			@splitter = LineSplitter.new(line, length)
+			@from = @splitter.next()
+			@to = @splitter. next()
+		end
 	end
 	
 	def next

@@ -75,5 +75,18 @@ describe "TransitionProvider" do
 			
 			end
 		end
+		
+		it "also should take a line, a positive number and a LineTransitionProvider" do
+			exhaust = LineTransitionProvider.new("abcd", 3)
+			exhaust.next()
+			
+			provider = LineTransitionProvider.new("ef", 3, exhaust)
+			
+			[Transition.new('abc', 'def'), nil].each do |expected|
+				provider.next().should == expected
+			end
+			provider.residue.should == ''
+			provider.from == 'def'
+		end
 	end
 end
