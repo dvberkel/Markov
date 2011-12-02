@@ -15,4 +15,8 @@ class Transition
 	def each
 		[@from, @to].each {|element| yield(element)}
 	end
+	
+	def ==(other)
+		return (self.from == other.from and self.to == other.to)
+	end
 end
