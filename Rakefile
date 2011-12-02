@@ -13,9 +13,7 @@ file strippedFile do |t|
 		File.open(inputFile) do |file|
 			while line = file.gets
 				output = false if (line =~ /^\*{3} END/)
-				if (output) then
-					out.puts line
-				end
+				out.puts line if (output)
 				output = true if (line =~ /^\*{3} START[^:]/)
 			end
 		end
