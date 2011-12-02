@@ -1,9 +1,9 @@
 require 'transitionProvider'
 
 describe "TransitionProvider" do
-	describe "LineTransitionProvider" do
+	describe "LineSplitter" do
 		it "should take a line and a positive number" do
-			provider = LineTransitionProvider.new("", 1)
+			provider = LineSplitter.new("", 1)
 			
 			provider.should_not be(nil)
 		end
@@ -11,7 +11,7 @@ describe "TransitionProvider" do
 		describe "#next" do
 			it "should return nil on empty string" do
 				(1..10).each do |length|
-					LineTransitionProvider.new("", length).next().should be(nil)
+					LineSplitter.new("", length).next().should be(nil)
 				end
 			end
 			
@@ -25,7 +25,7 @@ describe "TransitionProvider" do
 					length = data[1]
 					expectedSequence = data[2]
 					
-					provider = LineTransitionProvider.new(line, length)
+					provider = LineSplitter.new(line, length)
 					
 					expectedSequence.each do |expected|
 						provider.next().should == expected

@@ -1,4 +1,4 @@
-class LineTransitionProvider
+class LineSplitter
 	def initialize(line, length)
 		@line = line
 		@length = length
