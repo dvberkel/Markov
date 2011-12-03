@@ -149,4 +149,26 @@ describe "Markov" do
 			end
 		end
 	end
+	
+	describe "class.#create" do
+		it "should accept lineProvider and length" do
+			markov = Markov.create(LineProvider.new(['ab', 'cd']), 2)
+			
+			markov.should_not be(nil)
+		end
+		
+		it "should have correct states" do
+			markov = Markov.create(LineProvider.new(['ab', 'cd']), 2)
+			
+			markov.should have(2).states
+		end
+		
+		it "should have correct apply" do
+			markov = Markov.create(LineProvider.new(['ab', 'cd']), 2)
+			
+			result = markov.apply('ab')
+			
+			result.should == 'cd'
+		end
+	end
 end 

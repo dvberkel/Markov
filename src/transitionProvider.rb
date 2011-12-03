@@ -39,6 +39,27 @@ class LineProvider
 	end
 end
 
+class FileLineProvider
+	def initialize(fileName)
+		@fileName = fileName
+		@file = nil
+	end
+	
+	def next
+		if (@file) then
+			line = @file.gets
+			if (line) then
+				return line
+			else
+				@file.close
+			end
+		else
+			@file = File.new(@fileName, 'r')
+			return self.next()
+		end
+	end
+end
+
 class LineTransitionProvider
 	def initialize(line, length, provider = nil)
 		if (provider)

@@ -7,10 +7,10 @@ describe "Pseudo Random Number Generator" do
 		end
 
 		it "should return consecutive integers" do
-			@generator.rand().should be(0)
-			@generator.rand().should be(1)
-			@generator.rand().should be(2)
-			@generator.rand().should be(3)
+			@generator.mrand().should be(0)
+			@generator.mrand().should be(1)
+			@generator.mrand().should be(2)
+			@generator.mrand().should be(3)
 		end
 	end
 	
@@ -20,10 +20,10 @@ describe "Pseudo Random Number Generator" do
 		end
 
 		it "should return consecutive integers modulo limit" do
-			@generator.rand(2).should be(1)
-			@generator.rand(2).should be(0)
-			@generator.rand(2).should be(1)
-			@generator.rand(2).should be(0)
+			@generator.mrand(2).should be(1)
+			@generator.mrand(2).should be(0)
+			@generator.mrand(2).should be(1)
+			@generator.mrand(2).should be(0)
 		end
 		
 	end

@@ -4,7 +4,7 @@ class Prng
 	end
 	
 	
-	def rand(limit = nil)
+	def mrand(limit = nil)
 		@seed += 1
 		if (limit) then
 			return @seed % limit
@@ -15,7 +15,7 @@ class Prng
 end
 
 class RPrng < Prng
-	def rand(limit = 2)
+	def mrand(limit = 2)
 		return rand(limit)
 	end
 end

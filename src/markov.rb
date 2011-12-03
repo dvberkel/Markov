@@ -1,6 +1,17 @@
 require 'prng'
 
 class Markov
+	def self.create(lineProvider, length)
+		markov = Markov.new
+		
+		provider = TransitionProvider.new(lineProvider, length)
+		while (transition = provider.next)
+			markov.add(transition)
+		end
+		
+		return markov
+	end
+	
 	def initialize(prng = RPrng.new)
 		@stateTransitions = {}
 		@prng = prng
@@ -29,7 +40,7 @@ class Markov
 	private
 	def transition(element)
 		if (@stateTransitions.include?(element) and not @stateTransitions[element].empty?) then
-			index = @prng.rand(@stateTransitions[element].length)
+			index = @prng.mrand(@stateTransitions[element].length)
 			return @stateTransitions[element][index].to
 		else
 			return nil
