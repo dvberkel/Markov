@@ -84,20 +84,12 @@ class TransitionProvider
 			if (transition) then
 				return transition
 			else
-				line = @lineProvider.next()
-				if (line) then
-					@lineTransitionProvider = LineTransitionProvider.new(line, @length, @lineTransitionProvider)
-					return @lineTransitionProvider.next()
-				else
-				end
+				@lineTransitionProvider = nextLineTransitionProvider(@lineProvider.next(), @length, @lineTransitionProvider)
+				return @lineTransitionProvider.next()
 			end
 		else
-			line = @lineProvider.next()
-			if (line) then
-				@lineTransitionProvider = nextLineTransitionProvider(line, @length, @lineTransitionProvider)
-				return @lineTransitionProvider.next()
-			else
-			end
+			@lineTransitionProvider = nextLineTransitionProvider(@lineProvider.next(), @length, @lineTransitionProvider)
+			return @lineTransitionProvider.next()
 		end
 	end
 	
