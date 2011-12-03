@@ -38,6 +38,17 @@ describe "TransitionProvider" do
 		end
 	end
 	
+	describe "LineProvider" do
+		it "should return consecutive lines" do
+			expectedLines = ["abcd", "efgh", "ijkl", nil]
+			provider = LineProvider.new(expectedLines)
+			
+			expectedLines.each do |expected|
+				provider.next().should == expected
+			end
+		end
+	end
+	
 	describe "LineTransitionProvider" do
 		it "should take a line and a positive number" do
 			provider = LineTransitionProvider.new("", 1)

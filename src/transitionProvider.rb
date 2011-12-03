@@ -22,6 +22,23 @@ class LineSplitter
 	end
 end
 
+class LineProvider
+	def initialize(lines)
+		@lines = lines
+		@index = 0
+	end
+	
+	def next
+		if (@index < @lines.length) then
+			result = @lines[@index]
+			@index += 1
+			return result
+		else
+			return nil
+		end
+	end
+end
+
 class LineTransitionProvider
 	def initialize(line, length, provider = nil)
 		if (provider)
