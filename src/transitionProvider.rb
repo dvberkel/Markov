@@ -79,14 +79,8 @@ class TransitionProvider
 	end
 	
 	def next
-		if (@lineTransitionProvider) then
-			transition = @lineTransitionProvider.next()
-			if (transition) then
-				return transition
-			else
-				@lineTransitionProvider = nextLineTransitionProvider(@lineProvider.next(), @length, @lineTransitionProvider)
-				return @lineTransitionProvider.next()
-			end
+		if (@lineTransitionProvider and transition = @lineTransitionProvider.next()) then
+			return transition
 		else
 			@lineTransitionProvider = nextLineTransitionProvider(@lineProvider.next(), @length, @lineTransitionProvider)
 			return @lineTransitionProvider.next()
