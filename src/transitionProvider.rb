@@ -75,11 +75,11 @@ class TransitionProvider
 	def initialize(lineProvider, length)
 		@lineProvider = lineProvider
 		@length = length
-		@lineTransitionProvider = nil
+		@lineTransitionProvider = LineTransitionProvider.new(@lineProvider.next(), @length)
 	end
 	
 	def next
-		if (@lineTransitionProvider and transition = @lineTransitionProvider.next()) then
+		if (transition = @lineTransitionProvider.next()) then
 			return transition
 		else
 			@lineTransitionProvider = nextLineTransitionProvider(@lineProvider.next(), @length, @lineTransitionProvider)
