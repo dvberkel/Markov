@@ -100,4 +100,17 @@ describe "TransitionProvider" do
 			provider.from == 'def'
 		end
 	end
+	
+	describe "Real deal" do
+		it "given LineProvider and length should return sequence" do
+			provider = TransitionProvider.new(LineProvider.new(["abcd", "efgh"]), 2)
+			
+			[
+				Transition.new("ab", "cd"), Transition.new("cd", "ef"),
+				Transition.new("ef", "gh"), nil
+			].each do |expected|
+				provider.next().should == expected
+			end
+		end
+	end
 end

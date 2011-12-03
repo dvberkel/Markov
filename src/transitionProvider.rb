@@ -70,3 +70,43 @@ class LineTransitionProvider
 		return @from
 	end
 end
+
+class TransitionProvider
+	def initialize(lineProvider, length)
+		@lineProvider = lineProvider
+		@length = length
+		@lineTransitionProvider = nil
+	end
+	
+	def next
+		if (@lineTransitionProvider) then
+			transition = @lineTransitionProvider.next()
+			if (transition) then
+				return transition
+			else
+				line = @lineProvider.next()
+				if (line) then
+					@lineTransitionProvider = LineTransitionProvider.new(line, @length, @lineTransitionProvider)
+					return @lineTransitionProvider.next()
+				else
+				end
+			end
+		else
+			line = @lineProvider.next()
+			if (line) then
+				@lineTransitionProvider = nextLineTransitionProvider(line, @length, @lineTransitionProvider)
+				return @lineTransitionProvider.next()
+			else
+			end
+		end
+	end
+	
+	private
+	def nextLineTransitionProvider(line, length, provider)
+		if (line) then
+			return LineTransitionProvider.new(line, length, provider)
+		else
+			return provider
+		end
+	end
+end
