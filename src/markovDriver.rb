@@ -1,13 +1,14 @@
 class MarkovDriver
-	def initialize(markov, output)
+	def initialize(markov, output, prng = RPrng.new())
 		@markov = markov
 		@output = output
+		@prng = prng
 		@currentState = nil
 	end
 	
 	def produce(numberOfStates)
 		if (not @currentState) then
-			@currentState = @markov.states[0]
+			@currentState = @markov.states[@prng.mrand(@markov.states.length)]
 		end
 		numberOfStates.times do
 			@output.puts(@currentState)
