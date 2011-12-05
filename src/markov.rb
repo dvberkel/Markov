@@ -5,7 +5,7 @@ class Markov
 		markov = Markov.new
 		
 		provider = TransitionProvider.new(lineProvider, length)
-		while (transition = provider.next)
+		while (transition = provider.next())
 			markov.add(transition)
 		end
 		

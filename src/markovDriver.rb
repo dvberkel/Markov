@@ -29,3 +29,13 @@ class StringOutput
 		return @result
 	end
 end
+
+class FileOutput
+	def initialize(file)
+		@file = file
+	end
+	
+	def puts(value)
+		@file.write(value)
+	end
+end

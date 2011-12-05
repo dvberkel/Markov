@@ -40,23 +40,21 @@ class LineProvider
 end
 
 class FileLineProvider
-	def initialize(fileName)
-		@fileName = fileName
-		@file = nil
+	def initialize(file)
+		@operational = true
+		@file = file
 	end
 	
 	def next
-		if (@file) then
+		if(@operational) then
 			line = @file.gets
 			if (line) then
 				return line
 			else
-				@file.close
+				@operational = false
 			end
-		else
-			@file = File.new(@fileName, 'r')
-			return self.next()
 		end
+		return nil
 	end
 end
 
