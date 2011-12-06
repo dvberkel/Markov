@@ -113,4 +113,16 @@ describe "TransitionProvider" do
 			end
 		end
 	end
+	
+	describe "short lines" do
+		it "given LineProvider adn length should return sequence" do
+			provider = TransitionProvider.new(LineProvider.new(["abcd", "e", "f"]), 3)
+			
+			[
+				Transition.new("abc", "def"), nil
+			].each do |expected|
+				provider.next().should == expected
+			end
+		end
+	end
 end

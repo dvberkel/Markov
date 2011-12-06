@@ -101,7 +101,10 @@ class TransitionProvider
 		if (transition = @provider.next()) then
 			return transition
 		else
-			@provider = nextLineTransitionProvider(@lines.next(), @length, @provider)
+			while (@provider.residue.length < @length) do
+				break if not line = @lines.next()
+				@provider = nextLineTransitionProvider(line, @length, @provider)
+			end
 			return @provider.next()
 		end
 	end
